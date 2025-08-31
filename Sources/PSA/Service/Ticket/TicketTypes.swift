@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TicketInstance: Identifiable, Decodable, Sendable {
+public struct TicketInstance: Identifiable, Codable, Hashable, Sendable {
     public var id: Int
     public var summary: String?
     public var recordType: String?
@@ -73,12 +73,28 @@ public struct TicketInstance: Identifiable, Decodable, Sendable {
     public var resolutionHours: Int?
     public var resolvedBy: String?
     public var minutesWaiting: Int?
+
+    public init(id: Int) {
+        self.id = id
+    }
 }
 
-public struct Reference: Decodable, Sendable {
+public struct Reference: Codable, Identifiable, Hashable, Sendable {
     public var id: Int
     public var name: String?
     public var identifier: String?
     public var type: String?
     // var _info: [String: AnyCodable]?
+
+    public init(
+        id: Int,
+        name: String? = nil,
+        identifier: String? = nil,
+        type: String? = nil
+    ) {
+        self.id = id
+        self.name = name
+        self.identifier = identifier
+        self.type = type
+    }
 }
